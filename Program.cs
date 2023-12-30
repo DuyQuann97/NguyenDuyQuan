@@ -26,6 +26,12 @@ namespace ToDoList
                     case 2:
                         XoaViecLam();
                         break;
+                    case 3:
+                        CapNhatTrangThai();
+                        break;
+                    case 4:
+                        TimKiemViecLam();
+                        break;
                     case 6:
                         HienThiToanBoViecLam();
                         break;
@@ -33,6 +39,7 @@ namespace ToDoList
                         Console.WriteLine("Thong tin nhap khong hop le");
                         break;
                 }
+                Console.WriteLine();
                 Console.WriteLine("Nhan phim bat ky de tiep tuc chuong trinh");
                 Console.WriteLine("Nhan phim ESC de thoat chuong trinh");
                 ConsoleKeyInfo key = Console.ReadKey();
@@ -50,7 +57,7 @@ namespace ToDoList
             Console.WriteLine();
             Console.WriteLine("1. Khai bao viec can lam");
             Console.WriteLine("2. Xoa viec lam da nhap truoc do");
-            Console.WriteLine("3. Cap nhat trang thia viec lam");
+            Console.WriteLine("3. Cap nhat trang thai viec lam truoc do");
             Console.WriteLine("4. Tim kiem thong tin viec can lam");
             Console.WriteLine("5. Hien thi danh sach viec can lam theo du uu tien giam dan");
             Console.WriteLine("6. Hien thi toan bo danh sach viec can lam");
@@ -92,6 +99,45 @@ namespace ToDoList
                 message = " => Da duoc xoa thanh cong";
                 Console.WriteLine("Viec lam: {0}",listViecCanLam.LastOrDefault().tenViecCanLam) ;
             }
+            Console.WriteLine("{0}", message);
+            Console.WriteLine();
+        }
+
+        public static void CapNhatTrangThai() 
+        {
+            string message = "Khong co viec lam de cap nhat";
+            if (listViecCanLam.Count() > 0)
+            {
+                var lastItem = listViecCanLam.LastOrDefault();
+                Console.WriteLine("{0}",lastItem.trangThaiViecCanLam);
+                Console.Write("Cap nhat lai trang thai viec lam: ");
+                var trangThaiMoi = Console.ReadLine();
+                lastItem.trangThaiViecCanLam = trangThaiMoi;
+                message = "Trang thai viec lam da duoc cap nhat";
+            }
+            Console.WriteLine("{0}", message);
+            Console.WriteLine();
+        }
+        public static void TimKiemViecLam() 
+        {
+            string message = "Khong co viec lam de tim kiem";
+            if (listViecCanLam.Count > 0)
+            {
+                Console.Write("Nhap ten cong viec muon tim kiem: ");
+                string tenViecLam = Console.ReadLine();
+                var isContains = listViecCanLam.FirstOrDefault(c => c.tenViecCanLam == tenViecLam);
+                if (isContains != null)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Ten viec can lam: {0}", isContains.tenViecCanLam);
+                    Console.WriteLine("Do uu tien: {0}", isContains.doUuTien);
+                    Console.WriteLine("Thong tin chi tiet: {0}", isContains.thongTinViecCanLam);
+                    Console.WriteLine("Trang thai: {0}", isContains.trangThaiViecCanLam);
+                    Console.WriteLine();
+                    message = null;
+                }
+            }
+
             Console.WriteLine("{0}", message);
             Console.WriteLine();
         }
