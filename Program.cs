@@ -16,31 +16,37 @@ namespace ToDoList
                 HienThiMenu();
 
                 Console.WriteLine("Nhap so de chon menu");
-                int selectMenu = int.Parse(Console.ReadLine());
-
-                switch (selectMenu) 
+                try 
                 {
-                    case 1:
-                        KhaiBaoViecLam();
-                        break;
-                    case 2:
-                        XoaViecLam();
-                        break;
-                    case 3:
-                        CapNhatTrangThai();
-                        break;
-                    case 4:
-                        TimKiemViecLam();
-                        break;
-                    case 5:
-                        HienThiTheoDoUuTien();
-                        break;
-                    case 6:
-                        HienThiToanBoViecLam();
-                        break;
-                    default:
-                        Console.WriteLine("Thong tin nhap khong hop le");
-                        break;
+                    int selectMenu = int.Parse(Console.ReadLine());
+                    switch (selectMenu)
+                    {
+                        case 1:
+                            KhaiBaoViecLam();
+                            break;
+                        case 2:
+                            XoaViecLam();
+                            break;
+                        case 3:
+                            CapNhatTrangThai();
+                            break;
+                        case 4:
+                            TimKiemViecLam();
+                            break;
+                        case 5:
+                            HienThiTheoDoUuTien();
+                            break;
+                        case 6:
+                            HienThiToanBoViecLam();
+                            break;
+                        default:
+                            Console.WriteLine("Thong tin nhap khong hop le");
+                            break;
+                    }
+                }
+                catch (Exception ex) 
+                {
+                    Console.WriteLine("{0}",ex.Message);
                 }
                 Console.WriteLine();
                 Console.WriteLine("Nhan phim bat ky de tiep tuc chuong trinh");
@@ -70,7 +76,7 @@ namespace ToDoList
         public static void KhaiBaoViecLam() 
         {
             Console.Write("Ten viec can lam: ");
-            string tenViecLam = Console.ReadLine();
+            string tenViecLam = Console.ReadLine().Trim();
             int doUuTien = 5;
             try 
             {
@@ -117,7 +123,8 @@ namespace ToDoList
             if (listViecCanLam.Count() > 0)
             {
                 var lastItem = listViecCanLam.LastOrDefault();
-                Console.WriteLine("{0}",lastItem.trangThaiViecCanLam);
+                Console.WriteLine("Ten viec lam muon thay doi: {0}", lastItem.tenViecCanLam);
+                Console.WriteLine("Trang thai hien tai : {0}",lastItem.trangThaiViecCanLam);
                 Console.Write("Cap nhat lai trang thai viec lam: ");
                 var trangThaiMoi = Console.ReadLine();
                 lastItem.trangThaiViecCanLam = trangThaiMoi;
@@ -132,7 +139,7 @@ namespace ToDoList
             if (listViecCanLam.Count > 0)
             {
                 Console.Write("Nhap ten cong viec muon tim kiem: ");
-                string tenViecLam = Console.ReadLine();
+                string tenViecLam = Console.ReadLine().Trim();
                 var isContains = listViecCanLam.FirstOrDefault(c => c.tenViecCanLam == tenViecLam);
                 if (isContains != null)
                 {
