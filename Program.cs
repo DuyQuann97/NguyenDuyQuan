@@ -107,12 +107,21 @@ namespace ToDoList
         }
         public static void XoaViecLam() 
         {
+            // Debug code lai chuc nang nay
             string message = "Khong co viec lam de xoa";
             if (listViecCanLam.Count() > 0)
             {
-                var lastItem = listViecCanLam.Count();
-                listViecCanLam.RemoveAt(lastItem - 1);
-                message = " => Da duoc xoa thanh cong viec lam truoc do";
+                Console.Write("Nhap chinh xac ten cong viec can xoa: ");
+                string viecLamCanXoa = Console.ReadLine().Trim();
+                for (int i = 0; i < listViecCanLam.Length - 1; i++)
+                {
+                    if (listViecCanLam[i].tenViecCanLam == viecLamCanXoa)
+                    {
+                        listViecCanLam.RemoveAt(i);
+                        message = " => Da duoc xoa thanh cong";
+                        break;
+                    }
+                }
             }
             Console.WriteLine("{0}", message);
             Console.WriteLine();
